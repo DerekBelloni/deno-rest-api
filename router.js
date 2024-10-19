@@ -11,7 +11,11 @@ export class Router {
         const url = new URL(request.url);
         for (const route of this.routes) {
             if (route.method === request.method && route.path === url.pathname) {
-                return await route.handler(request);
+                const response = await route.handler(request);
+                return new Response(JSON.stringify(response), {
+                    status: 200,
+                    headers: {"Content-Type": "application/json"}
+                });
             }
         }
         return new Response("Not Found", { status: 404 });
