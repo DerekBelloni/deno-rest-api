@@ -13,6 +13,14 @@ class EmployeesManager {
             WHERE ${id} = emp_no
         `;
     }
+
+    getBirthDate(id, firstName) {
+        return client.queryArray`
+            SELECT birth_date FROM employees
+            WHERE ${id} = emp_no AND
+            ${firstName} = first_name
+        `;
+    }
 }
 
 const employeesManager = new EmployeesManager();
