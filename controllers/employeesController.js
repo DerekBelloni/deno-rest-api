@@ -17,6 +17,7 @@ export class EmployeesController {
     }
 
    static async getEmployeeHireDate(_req) {
+        console.log("_req: ", _req); 
         const id = _req.params.id;
         const lastName = _req.params.last_name;
         return await employeesManager.getHireDate(id, lastName);

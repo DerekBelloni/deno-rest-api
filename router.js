@@ -20,6 +20,8 @@ export class Router {
             if (routeParts[i].startsWith(':')) {
                 const paramName = routeParts[i].slice(1);
                 params[paramName] = urlParts[i];
+            } else if (routeParts[i] != urlParts[i]) {
+                return null;
             }
         }
         url.pathname = route.path;
@@ -28,9 +30,11 @@ export class Router {
 
     async route(request) {
         const url = new URL(request.url);
-        for (const route of this.routes) {
+       console.log('url', url.pathname);
+       for (const route of this.routes) {
+           console.log('route', route);
             const params = this.extractParams(route, url);
-          
+            console.log('params: ', params);
             if (params) {
                 Object.defineProperty(request, 'params', {
                     value: params,

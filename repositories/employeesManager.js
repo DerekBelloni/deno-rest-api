@@ -21,6 +21,14 @@ class EmployeesManager {
             ${firstName} = first_name
         `;
     }
+
+    getHireDate(id, lastName) {
+        return client.queryArray`
+            SELECT hire_date FROM employees
+            WHERE ${id} = emp_no AND
+            ${lastName} = last_name
+        `;
+    }
 }
 
 const employeesManager = new EmployeesManager();
